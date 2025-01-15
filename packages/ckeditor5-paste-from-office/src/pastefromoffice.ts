@@ -69,7 +69,10 @@ export default class PasteFromOffice extends Plugin {
 
 		clipboardPipeline.on(
 			'inputTransformation',
-			( evt, data: NormalizerData ) => {
+			(evt, data: NormalizerData) => {
+				console.log('my custom code inside PasteFromOffice plugin');
+				console.log('inputTransformation event');
+
 				if ( data._isTransformedWithPasteFromOffice ) {
 					return;
 				}
@@ -80,7 +83,8 @@ export default class PasteFromOffice extends Plugin {
 					return;
 				}
 
-				const htmlString = data.dataTransfer.getData( 'text/html' );
+				const htmlString = data.dataTransfer.getData('text/html');
+				console.log('htmlString', htmlString);
 				const activeNormalizer = normalizers.find( normalizer => normalizer.isActive( htmlString ) );
 
 				if ( activeNormalizer ) {
